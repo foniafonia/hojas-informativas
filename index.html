@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Materiales ColmenIA · Gabinete Fönia</title>
+<meta name="description" content="Materiales abiertos de ColmenIA y Gabinete Fönia para familias, maestros y logopedas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<script>
+(function(){var B='https://abacus.jasoncameron.dev/hit/foniafonia-hojas/',q=new URLSearchParams(location.search);try{if(q.get('yo')==='1')localStorage.setItem('hojas-no-contar','1')}catch(e){}var no=false;try{no=localStorage.getItem('hojas-no-contar')==='1'}catch(e){}var c=(q.get('c')||'').replace(/[^a-z0-9]/g,'').slice(0,6);window.cuenta=function(k){if(no)return;try{new Image().src=B+'portada_'+k;if(c)new Image().src=B+'portada_c_'+c+'_'+k}catch(e){}};cuenta('aperturas')})();
+</script>
+<style>
+:root{--papel:#FBF7EF;--hoja:#fff;--tinta:#1F2A2C;--tinta2:#4A5A5D;--raya:#E6DCC8;--petroleo:#0F5B66;--oro:#B8860B}
+@media (prefers-color-scheme:dark){:root{--papel:#151C1D;--hoja:#1E2829;--tinta:#E9EEEE;--tinta2:#B5C2C3;--raya:#34413F;--petroleo:#5FB8C2;--oro:#F2C14E}}
+*{box-sizing:border-box}body{margin:0;background:var(--papel);color:var(--tinta);font:18px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+main{max-width:820px;margin:0 auto;padding:24px 16px 60px}
+.cab{display:flex;gap:16px;align-items:center}.cab img{width:88px;height:88px;border-radius:20px;flex:none}
+h1{margin:0;font-size:30px;line-height:1.15;color:var(--petroleo)}.sub{margin:4px 0 0;color:var(--tinta2)}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:24px 0}
+.tarjeta{display:flex;flex-direction:column;gap:8px;background:var(--hoja);border:1px solid var(--raya);border-radius:20px;padding:16px;text-decoration:none;color:var(--tinta)}
+.tarjeta:hover,.tarjeta:focus-visible{border-color:var(--oro);outline:none}
+.tarjeta img{width:90px;height:90px;background:#fff;border-radius:16px;padding:6px;object-fit:contain}
+.tarjeta b{font-size:20px;color:var(--petroleo)}.tarjeta span{color:var(--tinta2);font-size:16px}
+.etq{font-size:13px;font-weight:700;color:var(--oro);text-transform:uppercase;letter-spacing:.05em}
+.pronto{opacity:.65}
+.cta{display:inline-block;background:var(--petroleo);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:12px 18px}
+@media (prefers-color-scheme:dark){.cta{color:#10181A}}
+.pie{border-top:1px solid var(--raya);margin-top:30px;padding-top:16px;color:var(--tinta2);font-size:15px}
+</style>
+</head>
+<body>
+<main>
+  <div class="cab">
+    <img src="colmenia-logo.webp" alt="ColmenIA">
+    <div><h1>Materiales ColmenIA</h1><p class="sub">Materiales abiertos para familias, maestros y logopedas. Los hacemos entre todos, en la colmena.</p></div>
+  </div>
+
+  <div class="rejilla">
+    <a class="tarjeta" href="hipoacusia-unilateral/" onclick="cuenta('abre_unilateral')">
+      <img src="hipoacusia-unilateral/pictos/oreja.png" alt="">
+      <span class="etq">Juego · Audición</span>
+      <b>Un oído campeón</b>
+      <span>Entiende la audiometría y aprende trucos para vivir con un solo oído que oye bien. Cinco niveles con estrellas.</span>
+    </a>
+    <div class="tarjeta pronto">
+      <img src="hipoacusia-unilateral/pictos/hablar.png" alt="">
+      <span class="etq">Próximamente</span>
+      <b>Lo que pide la colmena</b>
+      <span>Cada material nuevo sale de lo que nos pedís. Cuéntanos qué necesitas.</span>
+    </div>
+  </div>
+
+  <p><a class="cta" href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" onclick="cuenta('skool')">Entra en la comunidad ColmenIA</a></p>
+
+  <div class="pie"><b>Gabinete Fönia · ColmenIA</b>. Estos materiales son informativos y no sustituyen la consulta con un profesional.</div>
+</main>
+</body>
+</html>

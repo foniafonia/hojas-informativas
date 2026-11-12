@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Un oído campeón · Gabinete Fönia</title>
+<meta name="description" content="Juego corto para entender la audiometría y vivir con un solo oído que oye bien: simulador, dónde sentarse y cómo cuidar el oído bueno. Gabinete Fönia · ColmenIA.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Un oído campeón">
+<meta property="og:description" content="Entiende tu audiometría y aprende trucos para vivir con un solo oído que oye bien, jugando.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<script>
+/* contador anónimo (abacus): ?c=fb|wa|… para saber el canal; ?yo=1 para que no cuente */
+(function(){
+  var B='https://abacus.jasoncameron.dev/hit/foniafonia-hojas/';
+  var q=new URLSearchParams(location.search);
+  try{ if(q.get('yo')==='1') localStorage.setItem('hojas-no-contar','1'); }catch(e){}
+  var no=false; try{ no=localStorage.getItem('hojas-no-contar')==='1'; }catch(e){}
+  var c=(q.get('c')||'').replace(/[^a-z0-9]/g,'').slice(0,6);
+  var hechos={};
+  window.hojaCuenta=function(k,unaVez){ if(no) return; if(unaVez){ if(hechos[k]) return; hechos[k]=1; } try{ new Image().src=B+'unilateral_'+k; if(c) new Image().src=B+'unilateral_c_'+c+'_'+k; }catch(e){} };
+  hojaCuenta('aperturas');
+})();
+</script>
+<style>
+:root{--papel:#FBF7EF;--hoja:#FFFFFF;--tinta:#1F2A2C;--tinta2:#4A5A5D;--raya:#E6DCC8;--petroleo:#0F5B66;--petroleo-s:#DCEBEC;--rojo:#B03A2E;--azul:#2457A6;--ambar:#7A5300;--ambar-s:#F6E7C4;--oro:#E0A100;--verde:#1E7A46;--verde-s:#DFF2E6;--mal-s:#F8E1DE}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--papel:#151C1D;--hoja:#1E2829;--tinta:#E9EEEE;--tinta2:#B5C2C3;--raya:#34413F;--petroleo:#5FB8C2;--petroleo-s:#1F3A3E;--rojo:#E8796D;--azul:#86A9E8;--ambar:#F0C978;--ambar-s:#3A3220;--oro:#F2C14E;--verde:#6FCF97;--verde-s:#1F3A2B;--mal-s:#3D2523}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);font:18px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+main{max-width:780px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:30px;line-height:1.15;margin:4px 0;color:var(--petroleo)}
+h2{font-size:24px;margin:4px 0 8px;color:var(--petroleo)}
+h3{font-size:19px;margin:14px 0 6px}
+p{margin:8px 0}
+a{color:var(--petroleo)}
+.picto{background:#fff;border-radius:14px;padding:6px;display:block;object-fit:contain}
+.cab{display:flex;gap:14px;align-items:center}
+.cab .picto{width:86px;height:86px;flex:none}
+.entrada{color:var(--tinta2);margin:4px 0 0}
+/* estrellas y niveles */
+.marcador{position:sticky;top:0;z-index:5;background:var(--papel);padding:10px 0 8px;margin:10px 0 6px;border-bottom:1px solid var(--raya)}
+.estrellas{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.estrella{font-size:26px;line-height:1;filter:grayscale(1);opacity:.35;transition:transform .3s}
+.estrella.si{filter:none;opacity:1;transform:scale(1.15)}
+.nivs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.nivs button{font:inherit;font-size:15px;border:2px solid var(--raya);background:var(--hoja);color:var(--tinta);border-radius:999px;padding:4px 12px;cursor:pointer}
+.nivs button[aria-current="step"]{border-color:var(--petroleo);background:var(--petroleo-s);font-weight:700}
+.nivs button.hecho::after{content:" ⭐"}
+.nivel{display:none;background:var(--hoja);border:1px solid var(--raya);border-radius:20px;padding:16px 18px;margin:12px 0}
+.nivel.activo{display:block}
+.num{font-size:14px;font-weight:700;color:var(--tinta2);text-transform:uppercase;letter-spacing:.05em}
+/* botones */
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:11px 16px;cursor:pointer;background:var(--petroleo);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#10181A}}
+.btn.sec{background:var(--petroleo-s);color:var(--tinta)}
+.btn:focus-visible,.op:focus-visible,.nivs button:focus-visible,.carta:focus-visible,.oidos button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+.fila{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.op{font:inherit;text-align:left;display:flex;gap:10px;align-items:center;width:100%;border:2px solid var(--raya);background:var(--hoja);color:var(--tinta);border-radius:14px;padding:10px 12px;margin:6px 0;cursor:pointer}
+.op .picto{width:58px;height:58px;flex:none}
+.op.bien{border-color:var(--verde);background:var(--verde-s)}
+.op.mal{border-color:var(--rojo);background:var(--mal-s)}
+.op[disabled]{cursor:default}
+.resp{border-radius:12px;padding:8px 12px;margin:6px 0;display:none}
+.resp.ver{display:block}
+.resp.bien{background:var(--verde-s)}
+.resp.mal{background:var(--mal-s)}
+.pregunta{border-top:1px dashed var(--raya);padding-top:6px;margin-top:10px}
+/* elegir oído */
+.oidos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.oidos button{font:inherit;border:3px solid var(--raya);background:var(--hoja);color:var(--tinta);border-radius:16px;padding:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.oidos button .picto{width:72px;height:72px}
+.oidos button[aria-pressed="true"]{border-color:var(--petroleo);background:var(--petroleo-s);font-weight:700}
+/* audiograma */
+svg{max-width:100%;height:auto;display:block;margin:6px auto}
+.deslizador{display:flex;gap:12px;align-items:center;background:var(--petroleo-s);border-radius:16px;padding:10px 12px;margin:10px 0}
+.deslizador .picto{width:80px;height:80px;flex:none}
+.deslizador input{width:100%}
+.nota{font-size:14px;color:var(--tinta2)}
+/* tarjetas de dificultad */
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:10px 0}
+.tarj{background:var(--papel);border:1px solid var(--raya);border-radius:14px;padding:10px;text-align:center;font-size:16px}
+.tarj .picto{width:84px;height:84px;margin:0 auto 4px}
+/* simulador */
+.sim{background:var(--petroleo-s);border-radius:16px;padding:12px 14px;margin:10px 0}
+.lados{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lados .op{justify-content:center;flex-direction:column;text-align:center}
+.marc{font-weight:700}
+/* cartas que se giran */
+.cartas{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:10px 0}
+.carta{font:inherit;color:var(--tinta);border:2px solid var(--raya);background:var(--papel);border-radius:16px;min-height:190px;padding:12px;cursor:pointer;text-align:left;position:relative}
+.carta .frente{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:100%;text-align:center;font-weight:700;font-size:19px}
+.carta .frente .picto{width:76px;height:76px}
+.carta .dorso{display:none;font-size:16px}
+.carta.girada{background:var(--ambar-s);border-color:var(--oro)}
+.carta.girada .frente{display:none}
+.carta.girada .dorso{display:block}
+/* final */
+.final{text-align:center}
+.final .picto{width:130px;height:130px;margin:6px auto}
+.frase{background:var(--ambar-s);border-radius:14px;padding:12px;font-size:20px;font-weight:700;margin:10px 0}
+.sello{display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--tinta);font-size:13px;line-height:1.2;margin-bottom:6px}.sello img{border-radius:10px}.sello b{color:var(--petroleo);font-size:15px}
+.pie{margin-top:30px;border-top:1px solid var(--raya);padding-top:14px;font-size:15px;color:var(--tinta2)}
+.cta{display:inline-block;margin-top:8px;background:var(--petroleo);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:11px 16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta{color:#10181A}}
+details{margin:10px 0}summary{cursor:pointer;font-weight:700}
+.ev{font-size:14px;color:var(--tinta2)}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--tinta);color:var(--papel);padding:10px 16px;border-radius:999px;font-weight:700;display:none;z-index:9;max-width:92vw;text-align:center}
+.toast.ver{display:block}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:480px){h1{font-size:25px}.cab .picto{width:66px;height:66px}.op .picto{width:48px;height:48px}}
+@media print{.marcador,.nivs,.btn,.sim,.toast{display:none}.nivel{display:block;break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<main>
+  <a class="sello" href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" data-sk="sello"><img src="colmenia-logo.webp" alt="ColmenIA" width="44" height="44"><span><b>ColmenIA</b><br>Gabinete Fönia</span></a>
+  <div class="cab">
+    <img class="picto" src="pictos/oreja.png" alt="">
+    <div>
+      <h1>Un oído campeón</h1>
+    <p class="entrada">Si un oído oye muy poco o nada y el otro oye bien, se puede llevar una vida normal. Algunas situaciones cuestan más, pero suelen tener truco. Cinco niveles cortos para entenderlo jugando.</p>
+    </div>
+  </div>
+
+  <div class="marcador" aria-live="polite">
+    <div class="estrellas"><span id="est" class="estrellas"></span> <span id="estTxt" class="nota"></span></div>
+    <nav class="nivs" id="nivs" aria-label="Niveles"></nav>
+  </div>
+
+  <!-- 0 · elegir oído -->
+  <section class="nivel activo" data-n="0">
+    <div class="num">Antes de empezar</div>
+    <h2>¿Qué oído oye bien?</h2>
+    <p>Lo usamos para darte los trucos de tu lado. Si es para tu hijo o tu hija, elige su oído bueno.</p>
+    <div class="oidos">
+      <button type="button" data-oido="izq" aria-pressed="false"><img class="picto" src="pictos/izquierda.png" alt="">El izquierdo</button>
+      <button type="button" data-oido="der" aria-pressed="false"><img class="picto" src="pictos/derecha.png" alt="">El derecho</button>
+    </div>
+    <p class="nota">No se guarda en ningún sitio: solo vale mientras tienes abierta esta página.</p>
+  </section>
+
+  <!-- 1 · audiograma -->
+  <section class="nivel" data-n="1">
+    <div class="num">Nivel 1 de 5</div>
+    <h2>El mapa del sonido</h2>
+    <p>La audiometría es un mapa de cómo oyes. Este es un <b>ejemplo inventado</b>, no el de nadie.</p>
+    <svg viewBox="0 0 360 240" role="img" aria-label="Ejemplo de audiometría: el oído izquierdo (X azul) arriba, cerca de lo normal; el derecho (O roja) abajo del todo">
+      <rect x="50" y="14" width="290" height="190" fill="none" stroke="currentColor" stroke-opacity=".25"/>
+      <rect x="50" y="14" width="290" height="40" fill="var(--verde)" fill-opacity=".12"/>
+      <g stroke="currentColor" stroke-opacity=".12"><line x1="50" y1="52" x2="340" y2="52"/><line x1="50" y1="90" x2="340" y2="90"/><line x1="50" y1="128" x2="340" y2="128"/><line x1="50" y1="166" x2="340" y2="166"/></g>
+      <rect id="banda" x="56" y="14" width="28" height="190" fill="var(--oro)" fill-opacity=".25"/>
+      <g font-size="11" fill="currentColor" opacity=".75">
+        <text x="44" y="18" text-anchor="end">0</text><text x="44" y="56" text-anchor="end">20</text><text x="44" y="94" text-anchor="end">40</text><text x="44" y="132" text-anchor="end">60</text><text x="44" y="170" text-anchor="end">80</text><text x="44" y="206" text-anchor="end">100</text>
+        <text x="62" y="222">250</text><text x="118" y="222">500</text><text x="172" y="222">1000</text><text x="228" y="222">2000</text><text x="286" y="222">4000 Hz</text>
+        <text x="8" y="120" transform="rotate(-90 8 120)">decibelios (dB)</text>
+        <text x="336" y="30" text-anchor="end" font-weight="700" fill="var(--verde)">zona normal</text>
+        <text x="195" y="236" text-anchor="middle">graves  →  agudos</text>
+      </g>
+      <g stroke="var(--azul)" stroke-width="2.5" fill="none"><polyline points="70,33 126,33 182,37 238,37 294,41"/></g>
+      <g fill="var(--azul)" font-size="16" font-weight="700" text-anchor="middle"><text x="70" y="39">×</text><text x="126" y="39">×</text><text x="182" y="43">×</text><text x="238" y="43">×</text><text x="294" y="47">×</text></g>
+      <g stroke="var(--rojo)" stroke-width="2.5" fill="none"><polyline points="70,190 126,194 182,196 238,198 294,198"/><circle cx="70" cy="190" r="6"/><circle cx="126" cy="194" r="6"/><circle cx="182" cy="196" r="6"/><circle cx="238" cy="198" r="6"/><circle cx="294" cy="198" r="6"/></g>
+    </svg>
+    <div class="deslizador">
+      <img class="picto" id="sonPicto" src="pictos/tambor.png" alt="">
+      <div style="flex:1">
+        <label for="frec"><b>Mueve el sonido:</b> <span id="sonTxt">250 Hz, grave, como un tambor</span></label>
+        <input type="range" id="frec" min="0" max="4" step="1" value="0">
+        <button type="button" class="btn sec" id="sonar">🔊 Escuchar</button>
+      </div>
+    </div>
+    <p><b>De izquierda a derecha</b>, del sonido grave al agudo. <b>De arriba abajo</b>, cuánto tiene que sonar para oírlo: arriba se oye hasta lo más flojito y abajo hace falta mucho volumen. La <b style="color:var(--azul)">X azul</b> es el oído izquierdo y la <b style="color:var(--rojo)">O roja</b>, el derecho.</p>
+
+    <div class="pregunta" data-q="1"><h3>1. En este ejemplo, ¿qué oído oye bien?</h3>
+      <button type="button" class="op" data-ok="1">La X azul, el izquierdo: está arriba, en la zona normal</button>
+      <button type="button" class="op">La O roja, el derecho</button>
+      <div class="resp"></div></div>
+    <div class="pregunta" data-q="1"><h3>2. Una marca abajo del todo quiere decir…</h3>
+      <button type="button" class="op">Que ese oído oye muy bien</button>
+      <button type="button" class="op" data-ok="1">Que hace falta muchísimo volumen para oír (por debajo de 90 dB es una pérdida profunda)</button>
+      <div class="resp"></div></div>
+    <div class="pregunta" data-q="1"><h3>3. Si pone «timpanograma tipo A» y «neurosensorial»…</h3>
+      <button type="button" class="op" data-ok="1">El tímpano se mueve con normalidad (lo habitual es que no haya líquido) y la pérdida está más adentro, en el oído interno o el nervio</button>
+      <button type="button" class="op">Hay mocos detrás del tímpano</button>
+      <div class="resp"></div></div>
+    <p class="nota">Si ves corchetes [ ] o flechas &lt; &gt;, son pruebas por vía ósea: el sonido entra por el hueso.</p>
+  </section>
+
+  <!-- 2 · simulador -->
+  <section class="nivel" data-n="2">
+    <div class="num">Nivel 2 de 5</div>
+    <h2>Ponte en sus oídos</h2>
+    <p><b>Ponte auriculares</b>. La campana saldrá por la izquierda o por la derecha. Adivina de qué lado ha salido. Primero lo pruebas con dos oídos y después con un solo oído.</p>
+    <div class="sim">
+      <p id="simTxt" class="marc" aria-live="polite">Ronda con dos oídos: 0 de 3</p>
+      <div class="fila"><button type="button" class="btn" id="simPlay">🔔 Que suene</button><span class="nota" id="simEstado" aria-live="polite"></span></div>
+      <div class="lados">
+        <button type="button" class="op" data-lado="-1" disabled><img class="picto" src="pictos/izquierda.png" alt="">Por la izquierda</button>
+        <button type="button" class="op" data-lado="1" disabled><img class="picto" src="pictos/derecha.png" alt="">Por la derecha</button>
+      </div>
+      <p id="simRes" aria-live="polite"></p>
+    </div>
+    <p id="simNoAudio" class="nota" hidden>Este navegador no deja reproducir el sonido. No pasa nada: con un solo oído, saber de dónde viene un sonido se hace muy difícil, porque el cerebro compara lo que llega a cada oído.</p>
+    <h3>Lo que más cuesta con un solo oído</h3>
+    <div class="rejilla">
+      <div class="tarj"><img class="picto" src="pictos/mucho_ruido.png" alt="">Entender con ruido: bar, comedor, tele puesta</div>
+      <div class="tarj"><img class="picto" src="pictos/calle.png" alt="">Saber de dónde viene un coche o quién te llama</div>
+      <div class="tarj"><img class="picto" src="pictos/hablar.png" alt="">Hablar en grupo, sobre todo si hablan por el lado que no oye</div>
+      <div class="tarj"><img class="picto" src="pictos/cansado.png" alt="">Cansarse antes: estar pendiente todo el rato agota</div>
+    </div>
+    <p class="ev">Las revisiones sobre sordera de un lado lo describen así: cuesta sobre todo cuando el sonido llega por el lado que no oye y cuando hay ruido (Stewart, Clark y Niparko 2011). En niños aumenta el riesgo de dificultades de lenguaje y en el colegio, así que conviene vigilar su desarrollo (Lieu 2018).</p>
+  </section>
+
+  <!-- 3 · dónde me siento -->
+  <section class="nivel" data-n="3">
+    <div class="num">Nivel 3 de 5</div>
+    <h2>¿Dónde me pongo?</h2>
+    <p>Elige dónde te conviene ponerte para que tu oído bueno, el <b class="oidoBueno">izquierdo</b>, oiga mejor.</p>
+    <div id="sitios"></div>
+    <p class="ev">Son consejos de buena práctica y de sentido común acústico. No hemos encontrado ensayos que comparen un truco con otro.</p>
+  </section>
+
+  <!-- 4 · cuidar el oído -->
+  <section class="nivel" data-n="4">
+    <div class="num">Nivel 4 de 5</div>
+    <h2>Cuida tu oído campeón</h2>
+    <p>Es el oído que hace todo el trabajo. ¿Verdadero o falso?</p>
+    <div id="vf"></div>
+  </section>
+
+  <!-- 5 · ayudas -->
+  <section class="nivel" data-n="5">
+    <div class="num">Nivel 5 de 5</div>
+    <h2>Ayudas que puedes preguntar</h2>
+    <p>Gira las cuatro cartas. Son para que sepas que existen y puedas preguntarlo al otorrino o al audiólogo; si alguna te encaja, lo decide el especialista contigo.</p>
+    <div class="cartas" id="cartas"></div>
+    <p class="ev">Conducción ósea en sordera de un lado: mejora entender con ruido y la calidad de vida, sin mejorar la localización (Kim y cols. 2017). En niños, CROS sin cirugía y con poco efecto en localizar; el implante, con más posibilidades de oír por los dos lados, sobre todo si se hace pronto en la sordera de nacimiento (De Seta y cols. 2026). Micrófonos remotos y entender con ruido (Andren y cols. 2023).</p>
+  </section>
+
+  <!-- 6 · final -->
+  <section class="nivel final" data-n="6">
+    <img class="picto" src="pictos/medalla.png" alt="">
+    <h2 id="finTit">¡Oído campeón!</h2>
+    <p id="finTxt"></p>
+    <p>Tu frase para cuando haga falta:</p>
+    <div class="frase" id="frase">«Oigo mejor por este lado; ¿te pones aquí?»</div>
+    <div class="fila" style="justify-content:center">
+      <button type="button" class="btn" id="compartir">📲 Pásaselo a alguien</button>
+      <button type="button" class="btn sec" id="otraVez">Jugar otra vez</button>
+    </div>
+    <p class="nota">Si te ha servido, a alguien de tu familia o del colegio también le servirá.</p>
+    <p class="nota"><img src="colmenia-logo.webp" alt="" width="28" height="28" style="vertical-align:middle;border-radius:6px"> Un material de <a href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" data-sk="final">ColmenIA</a>, la comunidad de logopedas, maestros y familias.</p>
+  </section>
+
+  <div class="fila" id="navNiv" style="justify-content:space-between">
+    <button type="button" class="btn sec" id="atras">← Atrás</button>
+    <button type="button" class="btn" id="sigue">Empezar →</button>
+  </div>
+
+  <details>
+    <summary>De dónde sale esto (estudios)</summary>
+    <ul class="ev">
+      <li>Stewart, Clark y Niparko 2011: <a href="https://doi.org/10.1159/000323589">doi:10.1159/000323589</a></li>
+      <li>Lieu 2018: <a href="https://doi.org/10.1007/s40136-018-0185-5">doi:10.1007/s40136-018-0185-5</a></li>
+      <li>Kim y cols. 2017, revisión sistemática de conducción ósea: <a href="https://doi.org/10.1097/MAO.0000000000001359">doi:10.1097/MAO.0000000000001359</a></li>
+      <li>De Seta y cols. 2026, revisión sistemática en niños: <a href="https://doi.org/10.3390/audiolres16050129">doi:10.3390/audiolres16050129</a></li>
+      <li>Piva de Freitas y cols. 2025, metaanálisis: <a href="https://doi.org/10.1016/j.bjorl.2025.101628">doi:10.1016/j.bjorl.2025.101628</a></li>
+      <li>Andren y cols. 2023: <a href="https://doi.org/10.1080/14670100.2023.2239512">doi:10.1080/14670100.2023.2239512</a></li>
+      <li>La Organización Mundial de la Salud recomienda limitar el volumen y el tiempo de escucha con auriculares.</li>
+    </ul>
+    <p class="ev">Hemos leído los resúmenes de estos estudios, no el texto completo. <a href="index-v13-texto.html">Versión en texto para imprimir</a>.</p>
+  </details>
+
+  <div class="pie">
+    <p>Esta página es informativa y no sustituye la consulta con el otorrino, el audiólogo o la logopeda.</p>
+    <p style="display:flex;gap:12px;align-items:center"><img src="colmenia-logo.webp" alt="ColmenIA" width="64" height="64" style="border-radius:14px;flex:none"><span><b>Gabinete Fönia · ColmenIA</b><br>Hacemos materiales como este entre logopedas, maestros y familias.</span></p>
+    <a class="cta" href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" id="skool">Conoce ColmenIA en Skool</a>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+'use strict';
+function $(id){ return document.getElementById(id); }
+function qa(s,el){ return Array.prototype.slice.call((el||document).querySelectorAll(s)); }
+var NIV=qa('.nivel'), TOTAL=5;
+var estado={n:0, oido:null, estrellas:{}};
+var NOMBRES=['Tu oído','Mapa','Simulador','¿Dónde me pongo?','Cuidarlo','Ayudas','Medalla'];
+
+function toast(t){ var e=$('toast'); e.textContent=t; e.classList.add('ver'); clearTimeout(toast.t); toast.t=setTimeout(function(){ e.classList.remove('ver'); },2600); }
+function pintaEstrellas(){
+  var h='', k=0; for(var i=1;i<=TOTAL;i++){ var si=!!estado.estrellas[i]; if(si) k++; h+='<span class="estrella'+(si?' si':'')+'" aria-hidden="true">⭐</span>'; }
+  $('est').innerHTML=h; $('estTxt').textContent=k+' de '+TOTAL+' estrellas';
+  var nv=''; NOMBRES.forEach(function(nm,i){ nv+='<button type="button" data-ir="'+i+'"'+(i===estado.n?' aria-current="step"':'')+(estado.estrellas[i]?' class="hecho"':'')+'>'+nm+'</button>'; });
+  $('nivs').innerHTML=nv;
+}
+function gana(n){
+  if(estado.estrellas[n]) return; estado.estrellas[n]=1; pintaEstrellas(); hojaCuenta('nivel'+n,true);
+  toast('⭐ ¡Estrella ganada! Nivel '+n+' superado');
+}
+function ir(n){
+  if(n>0 && !estado.oido){ toast('Elige primero qué oído oye bien'); n=0; }
+  estado.n=Math.max(0,Math.min(6,n));
+  NIV.forEach(function(s){ s.classList.toggle('activo', +s.dataset.n===estado.n); });
+  $('atras').style.visibility=estado.n===0?'hidden':'visible';
+  $('sigue').style.display=estado.n===6?'none':'';
+  $('sigue').textContent=estado.n===0?'Empezar →':(estado.n===5?'Ver mi medalla →':'Siguiente nivel →');
+  if(estado.n===6) final();
+  pintaEstrellas();
+  var top=document.querySelector('.marcador'); if(top && window.scrollY>top.offsetTop) window.scrollTo(0,top.offsetTop);
+}
+$('nivs').addEventListener('click',function(e){ var b=e.target.closest('[data-ir]'); if(b) ir(+b.dataset.ir); });
+$('sigue').addEventListener('click',function(){ ir(estado.n+1); });
+$('atras').addEventListener('click',function(){ ir(estado.n-1); });
+
+/* nivel 0: oído bueno */
+function lado(bueno){ return bueno?(estado.oido==='izq'?'izquierdo':'derecho'):(estado.oido==='izq'?'derecho':'izquierdo'); }
+qa('[data-oido]').forEach(function(b){ b.addEventListener('click',function(){
+  estado.oido=b.dataset.oido; qa('[data-oido]').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+  qa('.oidoBueno').forEach(function(x){ x.textContent=lado(true); });
+  pintaSitios(); hojaCuenta('oido_'+estado.oido,true); toast('Oído bueno: el '+lado(true)+'. ¡A jugar!');
+  setTimeout(function(){ ir(1); },700);
+}); });
+
+/* preguntas de opción (nivel 1) */
+function preguntas(cont, nivel){
+  var qs=qa('.pregunta',cont), ok=0;
+  qs.forEach(function(p){
+    var ops=qa('.op',p), r=p.querySelector('.resp'), hecha=false;
+    r.setAttribute('aria-live','polite');
+    ops.forEach(function(o){ o.addEventListener('click',function(){
+      if(hecha) return;
+      if(o.dataset.ok){ hecha=true; o.classList.add('bien'); ops.forEach(function(x){ x.disabled=true; }); r.className='resp ver bien'; r.textContent='¡Eso es!'; ok++; if(ok===qs.length) gana(nivel); }
+      else { o.classList.add('mal'); o.disabled=true; r.className='resp ver mal'; r.textContent='Casi. Prueba con la otra.'; }
+    }); });
+  });
+}
+preguntas(NIV[1],1);
+
+/* sonido (Web Audio, se crea solo al pulsar) */
+var AC=null;
+function audio(){ if(AC) return AC; var C=window.AudioContext||window.webkitAudioContext; if(!C) return null; try{ AC=new C(); }catch(e){ AC=null; } return AC; }
+function tono(frec,pan,vol,dur){
+  var a=audio(); if(!a) return false; if(a.state==='suspended') a.resume();
+  var t=a.currentTime, o=a.createOscillator(), g=a.createGain(), out=g;
+  o.type='sine'; o.frequency.value=frec;
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g);
+  if(a.createStereoPanner){ var p=a.createStereoPanner(); p.pan.value=pan; g.connect(p); out=p; }
+  else if(pan!==0){ var sp=a.createChannelMerger(2); g.connect(sp,0,pan<0?0:1); out=sp; }
+  out.connect(a.destination); o.start(t); o.stop(t+dur+0.05);
+  return true;
+}
+function campana(pan,v){
+  v=v||1; var ok=tono(880,pan,0.25*v,1.4); tono(1320,pan,0.10*v,1.0); tono(2200,pan,0.05*v,0.6); return ok;
+}
+document.addEventListener('visibilitychange',function(){ if(document.hidden && AC && AC.state==='running') AC.suspend(); });
+window.addEventListener('pagehide',function(){ if(AC){ try{ AC.close(); }catch(e){} AC=null; } });
+
+/* nivel 1: deslizador de frecuencias */
+var FR=[[250,'tambor','250 Hz, grave, como un tambor'],[500,'tambor','500 Hz, una voz grave'],[1000,'campana','1000 Hz, como una campana'],[2000,'pito','2000 Hz, un silbato'],[4000,'pajaro','4000 Hz, agudo, como un pájaro, la «s» o la «f»']];
+var XS=[56,112,168,224,280];
+function pintaFrec(){ var i=+$('frec').value, f=FR[i]; $('sonPicto').src='pictos/'+f[1]+'.png'; $('sonTxt').textContent=f[2]; $('banda').setAttribute('x',XS[i]); }
+$('frec').addEventListener('input',pintaFrec);
+$('sonar').addEventListener('click',function(){ var f=FR[+$('frec').value][0]; if(!tono(f,0,0.18,0.9)) toast('Este navegador no deja reproducir sonido'); });
+
+/* nivel 2: simulador de localización */
+var sim={fase:0, ronda:0, aciertos:[0,0], lado:0, espera:false};
+var bLados=qa('[data-lado]');
+function simTexto(){
+  if(sim.fase<2) $('simTxt').textContent=(sim.fase===0?'Ronda con dos oídos: ':'Ronda con un solo oído (el '+lado(true)+'): ')+sim.ronda+' de 3';
+}
+$('simPlay').addEventListener('click',function(){
+  if(sim.fase===2){ sim={fase:0,ronda:0,aciertos:[0,0],lado:0,espera:false}; $('simRes').textContent=''; simTexto(); $('simPlay').textContent='🔔 Que suene'; return; }
+  sim.lado=Math.random()<0.5?-1:1;
+  var bueno=estado.oido==='izq'?-1:1;
+  var pan=sim.fase===0?sim.lado*0.95:bueno; /* con un oído, todo llega por el lado bueno */
+  var vol=sim.fase===0?1:(0.75+Math.random()*0.5);
+  if(!campana(pan, vol)){
+    $('simNoAudio').hidden=false;
+    sim.fase=2; sim.espera=false;
+    bLados.forEach(function(b){ b.disabled=true; });
+    $('simEstado').textContent='';
+    $('simRes').textContent='No se puede hacer esta prueba en este navegador. Lee la explicación de abajo.';
+    $('simPlay').textContent='↺ Repetir';
+    gana(2);
+    return;
+  }
+  sim.espera=true; bLados.forEach(function(b){ b.disabled=false; b.classList.remove('bien','mal'); });
+  $('simEstado').textContent='¿Por dónde ha sonado?';
+});
+bLados.forEach(function(b){ b.addEventListener('click',function(){
+  if(!sim.espera) return; sim.espera=false;
+  var acierto=+b.dataset.lado===sim.lado; if(acierto) sim.aciertos[sim.fase]++;
+  b.classList.add(acierto?'bien':'mal'); bLados.forEach(function(x){ x.disabled=true; });
+  $('simEstado').textContent=acierto?'¡Bien!':'Ha sonado por la '+(sim.lado<0?'izquierda':'derecha')+'.';
+  sim.ronda++; simTexto();
+  if(sim.ronda===3){
+    if(sim.fase===0){ sim.fase=1; sim.ronda=0; simTexto(); $('simRes').textContent='Con dos oídos: '+sim.aciertos[0]+' de 3. Ahora, como se oye con un solo oído…'; }
+    else {
+      sim.fase=2; $('simTxt').textContent='Resultado';
+      $('simRes').innerHTML='Con dos oídos acertaste <b>'+sim.aciertos[0]+' de 3</b>; con uno solo, <b>'+sim.aciertos[1]+' de 3</b>. Con un oído todo llega por el mismo lado y hay que adivinar. Por eso cuesta saber de dónde viene un coche o quién te llama: <b>en la calle, mira más</b>.';
+      $('simPlay').textContent='↺ Repetir'; gana(2);
+    }
+  }
+}); });
+
+/* nivel 3: dónde me pongo (depende del oído bueno) */
+function pintaSitios(){
+  if(!estado.oido) return;
+  var B=lado(true), M=lado(false), cerca=estado.oido==='izq'?'derecha':'izquierda';
+  var S=[
+    ['clase','En clase o en una reunión',[['Primera o segunda fila, cerca de quien habla, con el oído '+B+' hacia el grupo',1,'Cerca y con el oído bueno hacia la gente: la voz llega antes que el ruido.'],['Al fondo, que se está más tranquilo',0,'Al fondo la voz llega más débil y se mezcla con el ruido.']]],
+    ['pedir_en_un_bar','En la mesa o en un bar',[['El oído '+B+' hacia la gente y el '+M+' hacia la pared o el ruido',1,'Así el ruido va al oído que no oye y la conversación al que sí.'],['Mirando hacia la tele o la cocina, que hay más luz',0,'La tele y la cocina meten ruido justo en el oído bueno.']]],
+    ['coche','En el coche, detrás, hablando con los de delante',[['Sentado detrás a la '+cerca,1,'Desde ese asiento, tu oído '+B+' queda hacia el centro del coche, donde está la conversación.'],['Sentado detrás a la '+(cerca==='derecha'?'izquierda':'derecha'),0,'Desde ahí tu oído bueno mira a la ventanilla.']]],
+    ['amigo','Paseando con alguien',[['Que vaya por tu lado '+B,1,'Su voz te llega directa al oído bueno.'],['Da igual el lado',0,'Por el lado '+M+' se pierde mucho, sobre todo con tráfico.']]],
+    ['llamar_por_telefono','Te llaman al móvil',[['Al oído '+B+'; con auriculares, sonido en mono (ajustes de accesibilidad)',1,'En mono te llega todo por el oído que oye y no te pierdes nada del otro canal.'],['Al oído que pille, da igual',0,'Por el oído que no oye no entenderás la llamada.']]],
+    ['hablar','Alguien te habla por el lado '+M,[['Decirlo: «Oigo mejor por este lado; ¿te pones aquí?»',1,'Decirlo funciona mucho mejor que hacer como que entiendes.'],['Asentir y hacer como que entiendo',0,'Al final te pierdes la mitad y cansa más.']]]
+  ];
+  var h='', i;
+  for(i=0;i<S.length;i++){
+    var s=S[i], ops=s[2].slice(); if(i%2) ops.reverse();
+    h+='<div class="pregunta" data-sitio="'+i+'"><h3>'+s[1]+'</h3>';
+    ops.forEach(function(o){ h+='<button type="button" class="op"'+(o[1]?' data-ok="1"':'')+' data-fb="'+o[2].replace(/"/g,'&quot;')+'"><img class="picto" src="pictos/'+s[0]+'.png" alt="">'+o[0]+'</button>'; });
+    h+='<div class="resp"></div></div>';
+  }
+  $('sitios').innerHTML=h; sitiosOk=0;
+  qa('.resp',$('sitios')).forEach(function(r){ r.setAttribute('aria-live','polite'); });
+}
+var sitiosOk=0;
+$('sitios').addEventListener('click',function(e){
+  var o=e.target.closest('.op'); if(!o||o.disabled) return;
+  var p=o.closest('.pregunta'), r=p.querySelector('.resp');
+  r.textContent=o.dataset.fb;
+  if(o.dataset.ok){ o.classList.add('bien'); qa('.op',p).forEach(function(x){ x.disabled=true; }); r.className='resp ver bien'; sitiosOk++; if(sitiosOk===qa('.pregunta',$('sitios')).length) gana(3); }
+  else { o.classList.add('mal'); o.disabled=true; r.className='resp ver mal'; }
+});
+
+/* nivel 4: verdadero o falso */
+var VF=[
+  ['musica','Solo uso un oído, así que puedo poner los auriculares a tope.',0,'Falso. Al contrario: es tu único oído útil. Volumen moderado y descansos.'],
+  ['moto','En un concierto, con la moto o con herramientas ruidosas, mejor con tapones.',1,'Verdadero. El ruido fuerte puede dañar el oído que oye.'],
+  ['ir_medico','Si el oído bueno se tapona o duele, espero unos días a ver si se pasa.',0,'Falso. Ve pronto al médico: es el oído que hace todo el trabajo.'],
+  ['medico','Conviene hacer audiometrías de revisión, y antes si noto que oigo peor o me pitan los oídos.',1,'Verdadero. En niños, además, la audición puede cambiar con el tiempo.']
+];
+(function(){
+  var h=''; VF.forEach(function(v,i){ h+='<div class="pregunta" data-vf="'+i+'"><div style="display:flex;gap:10px;align-items:center"><img class="picto" style="width:64px;height:64px;flex:none" src="pictos/'+v[0]+'.png" alt=""><h3 style="margin:0">'+v[1]+'</h3></div><div class="fila"><button type="button" class="op" style="width:auto" data-v="1">✅ Verdadero</button><button type="button" class="op" style="width:auto" data-v="0">❌ Falso</button></div><div class="resp"></div></div>'; });
+  $('vf').innerHTML=h;
+  qa('.resp',$('vf')).forEach(function(r){ r.setAttribute('aria-live','polite'); });
+  var ok=0;
+  $('vf').addEventListener('click',function(e){
+    var o=e.target.closest('.op'); if(!o||o.disabled) return;
+    var p=o.closest('.pregunta'), v=VF[+p.dataset.vf], r=p.querySelector('.resp'), bien=(+o.dataset.v)===v[2];
+    if(bien){ o.classList.add('bien'); qa('.op',p).forEach(function(x){ x.disabled=true; }); r.className='resp ver bien'; r.textContent=v[3]; ok++; if(ok===VF.length) gana(4); }
+    else { o.classList.add('mal'); o.disabled=true; r.className='resp ver mal'; r.textContent='Piénsalo otra vez.'; }
+  });
+})();
+
+/* nivel 5: cartas */
+var CA=[
+  ['oir_mal','Audífono CROS','Recoge el sonido del lado que no oye y lo pasa al oído bueno. Sin operación y se puede quitar. Ayuda en algunas situaciones, pero apenas mejora saber de dónde viene el sonido.'],
+  ['oido','Conducción ósea (tipo BAHA)','Pasa el sonido por el hueso del cráneo hasta el oído que oye. Mejora entender con ruido, no el localizar.'],
+  ['oreja','Implante coclear','Es la ayuda que busca que el oído que no oye vuelva a oír algo. Sus mejores resultados, en sorderas tratadas pronto. Si la sordera es de nacimiento y es un adulto, pregunta qué se puede esperar en su caso.'],
+  ['profesora','Micrófono remoto (FM)','Quien habla lleva un micrófono que manda su voz a tu oído. Muy útil en clase o en reuniones.']
+];
+(function(){
+  var h=''; CA.forEach(function(c,i){ h+='<button type="button" class="carta" aria-expanded="false" data-c="'+i+'"><span class="frente"><img class="picto" src="pictos/'+c[0]+'.png" alt="">'+c[1]+'<span class="nota">Toca para girar</span></span><span class="dorso"><b>'+c[1]+'</b><br>'+c[2]+'</span></button>'; });
+  $('cartas').innerHTML=h;
+  var vistas={};
+  $('cartas').addEventListener('click',function(e){
+    var c=e.target.closest('.carta'); if(!c) return;
+    var g=c.classList.toggle('girada'); c.setAttribute('aria-expanded',g?'true':'false');
+    vistas[c.dataset.c]=1; if(Object.keys(vistas).length===CA.length) gana(5);
+  });
+})();
+
+/* final */
+function final(){
+  var k=Object.keys(estado.estrellas).length;
+  $('finTit').textContent=k===TOTAL?'¡Oído campeón!':'¡Casi lo tienes!';
+  $('finTxt').textContent=k===TOTAL?'Has ganado las 5 estrellas. Ya sabes leer el mapa, dónde ponerte y cómo cuidar tu oído '+lado(true)+'.':'Llevas '+k+' de '+TOTAL+' estrellas. Puedes volver a cualquier nivel desde los botones de arriba.';
+  hojaCuenta('final',true); if(k===TOTAL) hojaCuenta('campeon',true);
+}
+$('otraVez').addEventListener('click',function(){ location.reload(); });
+$('compartir').addEventListener('click',function(){
+  hojaCuenta('compartir');
+  var url=location.origin+location.pathname+'?c=wa', txt='Un juego corto para entender la audiometría y vivir con un solo oído que oye bien: ';
+  if(navigator.share){ navigator.share({title:'Un oído campeón',text:txt,url:url}).catch(function(){}); }
+  else { window.open('https://wa.me/?text='+encodeURIComponent(txt+url),'_blank','noopener'); }
+});
+$('skool').addEventListener('click',function(){ hojaCuenta('skool'); });
+qa('[data-sk]').forEach(function(a){ a.addEventListener('click',function(){ hojaCuenta('skool'); hojaCuenta('skool_'+a.dataset.sk); }); });
+
+ir(0);
+})();
+</script>
+</body>
+</html>
