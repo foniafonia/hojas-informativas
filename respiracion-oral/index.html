@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>¿Respira por la boca? · Gabinete Fönia · ColmenIA</title>
+<meta name="description" content="Marca lo que ves en casa y descubre a quién acudir si tu hijo o tu hija respira por la boca. Gabinete Fönia · ColmenIA.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="¿Respira por la boca?">
+<meta property="og:description" content="Qué mirar en casa y a quién acudir, en tres minutos.">
+<meta property="og:image" content="https://foniafonia.github.io/hojas-informativas/respiracion-oral/portada.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<script>
+/* contador anónimo (abacus): ?c=letras para saber el canal; ?yo=1 para que no cuente */
+(function(){
+  var B='https://abacus.jasoncameron.dev/hit/foniafonia-hojas/';
+  var q=new URLSearchParams(location.search);
+  try{ if(q.get('yo')==='1') localStorage.setItem('hojas-no-contar','1'); }catch(e){}
+  var no=false; try{ no=localStorage.getItem('hojas-no-contar')==='1'; }catch(e){}
+  var c=(q.get('c')||'').replace(/[^a-z]/g,'').slice(0,6);
+  var hechos={};
+  window.hojaCuenta=function(k,unaVez){ if(no) return; if(unaVez){ if(hechos[k]) return; hechos[k]=1; } try{ new Image().src=B+'respira_'+k; if(c) new Image().src=B+'respira_c_'+c+'_'+k; }catch(e){} };
+  hojaCuenta('aperturas');
+})();
+</script>
+<style>
+:root{--papel:#FBF7EF;--hoja:#FFFFFF;--tinta:#1F2A2C;--tinta2:#4A5A5D;--raya:#E6DCC8;--petroleo:#0F5B66;--petroleo-s:#DCEBEC;--rojo:#B03A2E;--oro:#E0A100;--ambar-s:#F6E7C4;--verde:#1E7A46;--verde-s:#DFF2E6;--mal-s:#F8E1DE}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--papel:#151C1D;--hoja:#1E2829;--tinta:#E9EEEE;--tinta2:#B5C2C3;--raya:#34413F;--petroleo:#5FB8C2;--petroleo-s:#1F3A3E;--rojo:#E8796D;--oro:#F2C14E;--ambar-s:#3A3220;--verde:#6FCF97;--verde-s:#1F3A2B;--mal-s:#3D2523}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papel);color:var(--tinta);font:18px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+main{max-width:780px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:30px;line-height:1.15;margin:4px 0;color:var(--petroleo)}
+h2{font-size:24px;margin:4px 0 8px;color:var(--petroleo)}
+h3{font-size:19px;margin:14px 0 6px}
+p{margin:8px 0}
+a{color:var(--petroleo)}
+.picto{background:#fff;border-radius:14px;padding:6px;display:block;object-fit:contain}
+.logos{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px;text-decoration:none;color:var(--tinta2);font-size:13px}
+.logos img{height:44px;width:auto;border-radius:10px;background:#fff}
+.cab{display:flex;gap:14px;align-items:center}
+.cab .picto{width:86px;height:86px;flex:none}
+.entrada{color:var(--tinta2);margin:4px 0 0}
+.bloque{background:var(--hoja);border:1px solid var(--raya);border-radius:20px;padding:16px 18px;margin:14px 0}
+.num{font-size:14px;font-weight:700;color:var(--tinta2);text-transform:uppercase;letter-spacing:.05em}
+.senales{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:10px 0}
+.sen{font:inherit;color:var(--tinta);display:flex;gap:10px;align-items:center;text-align:left;border:3px solid var(--raya);background:var(--papel);border-radius:16px;padding:10px;cursor:pointer;min-height:84px}
+.sen .picto{width:60px;height:60px;flex:none}
+.sen[aria-pressed="true"]{border-color:var(--petroleo);background:var(--petroleo-s);font-weight:700}
+.sen[aria-pressed="true"]::after{content:"✓";margin-left:auto;font-size:24px;color:var(--petroleo)}
+.result{border-radius:16px;padding:12px 14px;margin:10px 0;background:var(--ambar-s)}
+.result.tranqui{background:var(--verde-s)}
+.result.ojo{background:var(--mal-s)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:11px 16px;cursor:pointer;background:var(--petroleo);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn,:root:not([data-theme="light"]) .cta{color:#10181A}}
+.btn.sec{background:var(--petroleo-s);color:var(--tinta)}
+.btn:focus-visible,.op:focus-visible,.sen:focus-visible,.carta:focus-visible,summary:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+.fila{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.cartas{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:10px 0}
+.carta{font:inherit;color:var(--tinta);border:2px solid var(--raya);background:var(--papel);border-radius:16px;min-height:190px;padding:12px;cursor:pointer;text-align:left}
+.carta .frente{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:100%;text-align:center;font-weight:700;font-size:19px}
+.carta .frente .picto{width:76px;height:76px}
+.carta .dorso{display:none;font-size:16px}
+.carta.girada{background:var(--ambar-s);border-color:var(--oro)}
+.carta.girada .frente{display:none}
+.carta.girada .dorso{display:block}
+.pregunta{border-top:1px dashed var(--raya);padding-top:6px;margin-top:10px}
+.op{font:inherit;border:2px solid var(--raya);background:var(--hoja);color:var(--tinta);border-radius:14px;padding:8px 14px;cursor:pointer}
+.op.bien{border-color:var(--verde);background:var(--verde-s)}
+.op.mal{border-color:var(--rojo);background:var(--mal-s)}
+.resp{border-radius:12px;padding:8px 12px;margin:6px 0;display:none}
+.resp.ver{display:block}.resp.bien{background:var(--verde-s)}.resp.mal{background:var(--mal-s)}
+.nota{font-size:14px;color:var(--tinta2)}
+.pie{margin-top:30px;border-top:1px solid var(--raya);padding-top:14px;font-size:15px;color:var(--tinta2)}
+.cta{display:inline-block;margin-top:8px;background:var(--petroleo);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:11px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:480px){h1{font-size:25px}.cab .picto{width:66px;height:66px}}
+@media print{.btn,.fila .btn{display:none}body{background:#fff}.carta .dorso{display:block}.carta .frente .nota{display:none}}
+</style>
+</head>
+<body>
+<main>
+  <a class="logos" href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" data-sk="logos"><img src="fonia-logo.jpg" alt="Gabinete Fönia"><img src="colmenia-logo.webp" alt="ColmenIA"></a>
+  <div class="cab">
+    <img class="picto" src="pictos/nariz.png" alt="">
+    <div>
+      <h1>¿Respira por la boca?</h1>
+      <p class="entrada">Respirar por la nariz calienta y limpia el aire. Si un niño respira casi siempre por la boca, suele haber algo que tapa la nariz y conviene mirarlo. Tres minutos para saber qué observar y a quién acudir.</p>
+    </div>
+  </div>
+
+  <section class="bloque">
+    <div class="num">Paso 1 de 3</div>
+    <h2>Marca lo que ves en casa</h2>
+    <p>Toca las que pasan <b>casi todos los días</b>. Mejor si lo miras también mientras duerme.</p>
+    <div class="senales" id="senales"></div>
+    <div class="result" id="result" aria-live="polite">Marca las que veas y aquí te decimos qué hacer.</div>
+    <p class="nota">No se guarda en ningún sitio: solo vale mientras tienes abierta esta página.</p>
+  </section>
+
+  <section class="bloque">
+    <div class="num">Paso 2 de 3</div>
+    <h2>El camino: quién hace qué</h2>
+    <p>Gira las tres cartas. Suele ir en este orden.</p>
+    <div class="cartas" id="cartas"></div>
+  </section>
+
+  <section class="bloque">
+    <div class="num">Paso 3 de 3</div>
+    <h2>¿Verdadero o falso?</h2>
+    <div id="vf"></div>
+  </section>
+
+  <section class="bloque" style="text-align:center">
+    <img class="picto" src="pictos/medalla.png" alt="" style="width:110px;height:110px;margin:0 auto">
+    <h2 id="finTit">Ya sabes qué mirar</h2>
+    <p>Si alguien de tu entorno lo necesita, pásale esta página.</p>
+    <div class="fila" style="justify-content:center">
+      <button type="button" class="btn" id="compartir">Compartir</button>
+      <button type="button" class="btn sec" onclick="window.print()">Imprimir</button>
+    </div>
+  </section>
+
+  <div class="pie">
+    <details><summary>De dónde sale esto</summary>
+      <p class="nota">La Academia Americana de Pediatría recomienda preguntar a todos los niños si roncan, y estudiar a los que roncan y tienen otras señales. Cuando la causa son unas vegetaciones o amígdalas grandes, la primera opción es operarlas. Marcus y col., <i>Pediatrics</i> 2012. <a href="https://doi.org/10.1542/peds.2012-1671" target="_blank" rel="noopener">doi:10.1542/peds.2012-1671</a></p>
+      <p class="nota">Respirar por la boca se asocia a más placa y sangrado de encías (revisión sistemática de Kimura y col., 2025). <a href="https://doi.org/10.1111/ipd.70022" target="_blank" rel="noopener">doi:10.1111/ipd.70022</a></p>
+    </details>
+    <p>Esta página es informativa y no sustituye la consulta con el pediatra, el otorrino, el dentista o la logopeda.</p>
+    <p style="display:flex;gap:12px;align-items:center"><img src="colmenia-logo.webp" alt="" width="56" height="56" style="border-radius:12px;flex:none"><span><b>Gabinete Fönia · ColmenIA</b><br>Hacemos materiales como este entre logopedas, maestros y familias.</span></p>
+    <a class="cta" href="https://www.skool.com/logopedia-7339" target="_blank" rel="noopener" data-sk="final">Conoce ColmenIA en Skool</a>
+  </div>
+</main>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i);}, qa=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+
+/* paso 1: señales */
+var SEN=[
+  ['dormir','Duerme con la boca abierta','boca_noche'],
+  ['almohada','Ronca o respira con ruido al dormir','ronca'],
+  ['cansado','Se levanta cansado o con ojeras','cansado'],
+  ['boca','De día está con la boca abierta','boca_dia'],
+  ['nariz','Tiene la nariz tapada o con mocos casi siempre','nariz'],
+  ['lengua','Babea o traga con la lengua entre los dientes','lengua']
+];
+var marc={};
+$('senales').innerHTML=SEN.map(function(s,i){ return '<button type="button" class="sen" aria-pressed="false" data-i="'+i+'"><img class="picto" src="pictos/'+s[0]+'.png" alt="">'+s[1]+'</button>'; }).join('');
+$('senales').addEventListener('click',function(e){
+  var b=e.target.closest('.sen'); if(!b) return;
+  var i=b.dataset.i, on=b.getAttribute('aria-pressed')!=='true';
+  b.setAttribute('aria-pressed',on?'true':'false');
+  if(on) marc[i]=1; else delete marc[i];
+  hojaCuenta('marca',true); pinta();
+});
+function pinta(){
+  var n=Object.keys(marc).length, ronca=!!marc[1], r=$('result');
+  if(n===0){ r.className='result'; r.textContent='Marca las que veas y aquí te decimos qué hacer.'; return; }
+  if(ronca){ r.className='result ojo'; r.innerHTML='<b>Roncar casi cada noche no es lo normal en un niño.</b> Cuéntaselo al pediatra en la próxima visita, sin esperar a ver si se pasa. Si ronca y además marcaste otras señales, pide que lo valore el otorrino.'; hojaCuenta('res_ronca',true); return; }
+  if(n>=2){ r.className='result ojo'; r.innerHTML='<b>Has marcado '+n+' señales.</b> Merece la pena que lo vea el pediatra y, si hace falta, el otorrino, para saber qué tapa la nariz.'; hojaCuenta('res_varias',true); return; }
+  r.className='result tranqui'; r.innerHTML='<b>Una sola señal suele no ser motivo de alarma.</b> Fíjate unas noches cómo duerme. Si aparecen más, coméntalo con el pediatra.'; hojaCuenta('res_una',true);
+}
+
+/* paso 2: cartas */
+var CA=[
+  ['medico','1. Pediatra y otorrino','Primero hay que saber qué tapa la nariz: vegetaciones, amígdalas grandes, alergia, catarros que no acaban... Esto lo valora el médico. Mientras la nariz esté tapada, el niño no puede respirar por ella aunque quiera.'],
+  ['boca','2. Logopeda','Cuando la nariz ya deja pasar el aire, muchos niños siguen con la costumbre de la boca abierta. La logopeda enseña a cerrar los labios, colocar la lengua arriba y tragar bien. Es la terapia miofuncional.'],
+  ['dentista','3. Dentista u ortodoncista','Si el paladar es estrecho o los dientes no cierran bien, el dentista lo valora. Respirar por la boca también se relaciona con más placa y sangrado de encías.']
+];
+$('cartas').innerHTML=CA.map(function(c,i){ return '<button type="button" class="carta" aria-expanded="false" data-c="'+i+'"><span class="frente"><img class="picto" src="pictos/'+c[0]+'.png" alt="">'+c[1]+'<span class="nota">Toca para girar</span></span><span class="dorso"><b>'+c[1]+'</b><br>'+c[2]+'</span></button>'; }).join('');
+var vistas={};
+$('cartas').addEventListener('click',function(e){
+  var c=e.target.closest('.carta'); if(!c) return;
+  var g=c.classList.toggle('girada'); c.setAttribute('aria-expanded',g?'true':'false');
+  vistas[c.dataset.c]=1; if(Object.keys(vistas).length===CA.length) hojaCuenta('cartas',true);
+});
+
+/* paso 3: verdadero o falso */
+var VF=[
+  ['Si ronca cada noche, es normal: ya se le pasará.',0,'Falso. Roncar de forma habitual no es lo normal en un niño y conviene contárselo al pediatra.'],
+  ['Unas vegetaciones o amígdalas grandes pueden tapar el paso del aire.',1,'Verdadero. Es una de las causas más frecuentes. Lo valora el otorrino.'],
+  ['Con ejercicios de boca se arregla todo, aunque la nariz siga tapada.',0,'Falso. Primero la nariz tiene que dejar pasar el aire; luego la logopeda ayuda a cambiar la costumbre.']
+];
+$('vf').innerHTML=VF.map(function(v,i){ return '<div class="pregunta" data-vf="'+i+'"><h3>'+v[0]+'</h3><div class="fila"><button type="button" class="op" data-v="1">✅ Verdadero</button><button type="button" class="op" data-v="0">❌ Falso</button></div><div class="resp" aria-live="polite"></div></div>'; }).join('');
+var ok=0;
+$('vf').addEventListener('click',function(e){
+  var o=e.target.closest('.op'); if(!o||o.disabled) return;
+  var p=o.closest('.pregunta'), v=VF[+p.dataset.vf], r=p.querySelector('.resp'), bien=(+o.dataset.v)===v[1];
+  if(bien){ o.classList.add('bien'); qa('.op',p).forEach(function(x){ x.disabled=true; }); r.className='resp ver bien'; r.textContent=v[2]; ok++; if(ok===VF.length){ hojaCuenta('final',true); $('finTit').textContent='¡Ya sabes qué mirar!'; } }
+  else { o.classList.add('mal'); o.disabled=true; r.className='resp ver mal'; r.textContent='Piénsalo otra vez.'; }
+});
+
+$('compartir').addEventListener('click',function(){
+  hojaCuenta('compartir');
+  var url=location.origin+location.pathname+'?c=wa', txt='¿Tu peque respira por la boca? Qué mirar en casa y a quién acudir: ';
+  if(navigator.share){ navigator.share({title:'¿Respira por la boca?',text:txt,url:url}).catch(function(){}); }
+  else { window.open('https://wa.me/?text='+encodeURIComponent(txt+url),'_blank','noopener'); }
+});
+qa('[data-sk]').forEach(function(a){ a.addEventListener('click',function(){ hojaCuenta('skool'); hojaCuenta('skool_'+a.dataset.sk); }); });
+})();
+</script>
+</body>
+</html>
